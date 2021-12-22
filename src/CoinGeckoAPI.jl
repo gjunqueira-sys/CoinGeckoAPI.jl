@@ -157,7 +157,7 @@ List all coins with data (name, price, market, developer, community, etc)
     `kargs: dict` : the parameters to be added to the API url
 
 # Returns
-    `coins: Dict` : the list of coins
+    `coins: Dict` : the list of coins with id, name and symbol
 
 """
 function get_coins(kargs...)
