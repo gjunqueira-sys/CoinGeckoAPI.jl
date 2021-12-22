@@ -6,8 +6,18 @@ using HTTP
 using JSON3
 
 # exports
-export ping()
+export ping
 export get_price
+export get_token_price
+export get_supported_vs_currencies
+export get_coins_list
+export get_coins_markets
+export get_coin_by_id
+
+
+
+
+
 
 
 
@@ -160,7 +170,7 @@ List all coins with data (name, price, market, developer, community, etc)
     `coins: Dict` : the list of coins with id, name and symbol
 
 """
-function get_coins(kargs...)
+function get_coins_list(kargs...)
     apiurl = "coins/list"
     kwards= Dict(kargs)
 
@@ -173,10 +183,64 @@ function get_coins(kargs...)
 end
 
 
+"""
+    get_coins_markets(vs_currencies, kargs...)
+
+Use this to obtain all the coins market data (price, market cap, volume)
+
+# Arguments
+    `vs_currencies: list` : the currencies to get the price in
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coins_markets: Dict` : the list of coins with market data
+
+# Example:
+
+```julia
+r = get_coins_markets("usd")
+
+````
+"""
+function get_coins_markets(vs_currency, kargs...)
+    apiurl = "coins/markets"
+    kwards= Dict(kargs)
+    kwards["vs_currency"] = vs_currency
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
 
 
+"""
+    get_coin_by_id(id, kargs...)
+
+Get current data (name, price, market, including exchange tickers for a coin)
+
+# Arguments
+    `id: string` : the coin id 
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coin: Dict` : the current data for a coin
+
+"""
+function get_coin_by_id(id, kargs...)
+    apiurl = "coins"
+    kwards= Dict(kargs)
+    kwards["id"] = id
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
 
 
-
+r = get_coin_by_id("bitcoin")
 
 end
