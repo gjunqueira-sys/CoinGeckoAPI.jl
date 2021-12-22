@@ -6,3 +6,14 @@
 [![Coverage](https://codecov.io/gh/gjunqueira-sys/CoinGeckoAPI.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/gjunqueira-sys/CoinGeckoAPI.jl)
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 [![ColPrac: Contributor's Guide on Collaborative Practices for Community Packages](https://img.shields.io/badge/ColPrac-Contributor's%20Guide-blueviolet)](https://github.com/SciML/ColPrac)
+
+# Coin Gecko API V3
+
+One of the most powerfull crypto API's out there.
+
+("Coin Gecko API" is a trademark of [CoinGecko](https://www.coingecko.com/en/))
+
+# API Information:
+
+[Coin Gecko API](https://www.coingecko.com/en/api/documentation)
+
