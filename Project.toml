@@ -4,6 +4,8 @@ authors = ["Gil Junqueira"]
 version = "0.1.0"
 
 [deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DocumenterTools = "35a29f4d-8980-5a13-9543-d66fff28ecb8"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
 

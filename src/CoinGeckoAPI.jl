@@ -241,6 +241,8 @@ function get_coin_by_id(id, kargs...)
 end
 
 
-r = get_coin_by_id("bitcoin")
+
+
+
 
 end
