@@ -19,6 +19,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/gjunqueira-sys/CoinGeckoAPI.jl.git",
+    repo="github.com/gjunqueira-sys/CoinGeckoAPI.jl",
     devbranch="master",
 )

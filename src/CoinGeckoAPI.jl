@@ -13,6 +13,7 @@ export get_supported_vs_currencies
 export get_coins_list
 export get_coins_markets
 export get_coin_by_id
+export get_coin_ticker_by_id
 
 
 
@@ -242,6 +243,38 @@ end
 
 
 
+
+"""
+    get_coin_ticker_by_id(id, kargs...)
+
+Get coin tickers (paginated to 100 items)
+
+# Arguments
+    `id: string` : the coin id 
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coin_ticker: Dict` : the coin tickers
+
+
+"""
+function get_coin_ticker_by_id(id, kargs...)
+    apiurl = "coins/$id/tickers"
+    kwards= Dict(kargs)
+    kwards["id"] = id
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+
+
+
+function get_coin_ticker_by_id
 
 
 
