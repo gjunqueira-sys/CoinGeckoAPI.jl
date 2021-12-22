@@ -10,10 +10,25 @@
 # Coin Gecko API V3
 
 One of the most powerfull crypto API's out there.
+APIs are simple and easy to use, fully documented at the website.
 
 ("Coin Gecko API" is a trademark of [CoinGecko](https://www.coingecko.com/en/))
 
 # API Information:
 
 [Coin Gecko API](https://www.coingecko.com/en/api/documentation)
+
+
+# Julia API 
+Implementation follows Python API Implementation as close as possible.
+
+Return type is easy to use Dictionary format, ready for implementation and data analysis.
+# Examples:
+
+```julia
+using CoinGeckoAPI
+
+r = get_coin_by_id("bitcoin")
+```
+
 
