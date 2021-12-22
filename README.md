@@ -30,5 +30,60 @@ using CoinGeckoAPI
 
 r = get_coin_by_id("bitcoin")
 ```
+```julia
+r = ping()
+
+JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 1 entry:
+  :gecko_says => "(V3) To the Moon!"
+
+```
+
+```julia
+r = get_price("bitcoin", "usd") |>println
+
+{
+   "bitcoin": {
+                 "usd": 49228
+              }
+}
+```
+
+# API Documentation:
+
+https://www.coingecko.com/api/docs/v3
+
+## ping
+
+- ping()
+
+## simple
+
+- get_price(ids, vs_currencies, kargs...)
+
+
+```julia
+r = get_price("bitcoin", "usd", "include_market_cap" => "true", "include_24hr_vol" => "true", "include_24hr_change" => "true")
+```
+
+
+- get_token_price(id, contract_addresses, vs_currencies, kargs...)
+
+- get_supported_vs_currencies()
+
+## coins
+
+- get_coins_list(kargs...)
+
+- get_coins_markets(vs_currency, kargs...)
+
+```julia
+r = get_coins_markets("usd")
+
+````
+
+- get_coin_by_id(id, kargs...)
+
+- get_coin_ticker_by_id(id, kargs...)
+
 
 
