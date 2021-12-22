@@ -14,6 +14,8 @@ export get_coins_list
 export get_coins_markets
 export get_coin_by_id
 export get_coin_ticker_by_id
+export get_coin_history_by_id
+export get_coin_market_chart_by_id
 
 
 
@@ -273,8 +275,83 @@ end
 
 
 
+"""
+    get_coin_history_by_id(id, date, kargs...) 
 
-function get_coin_ticker_by_id
+Get Historical data (name, price, market, stats ) at a given date for a coin.
+
+# Arguments
+    `id: string` : the coin id 
+    `date: string` : the date to get the data for
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coin_history: Dict` : the historical data for a coin
+
+# Example:
+```julia
+r = get_coin_history_by_id("bitcoin", "30-12-2017")
+
+````
+"""
+function get_coin_history_by_id(id, date, kargs...)
+    apiurl = "coins/$id/history"
+    kwards= Dict(kargs)
+    kwards["id"] = id
+    kwards["date"] = date
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+
+
+
+"""
+    get_coin_market_chart_by_id(id, vs_currency, days, kargs...)
+
+Get historical market data include price, market cap, and 24h volume (granularity auto)
+Minutely data will be used for duration within 1 day, Hourly data will be used for duration between 1 day and 90 days, 
+    Daily data will be used for duration above 90 days.
+
+# Arguments
+    `id: string` : the coin id 
+    `vs_currency: string` : the currency to get the data in
+    `days: String` : the number of days to get the data for
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coin_market_chart: Dict` : the historical market data for a coin
+
+# Example:
+```julia
+r = get_coin_market_chart_by_id("bitcoin", "usd", "30")
+```
+
+"""
+function get_coin_market_chart_by_id(id, vs_currency, days, kargs...)
+    apiurl = "coins/$id/market_chart"
+    kwards= Dict(kargs)
+    kwards["id"] = id
+    kwards["vs_currency"] = vs_currency
+    kwards["days"] = days
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+
+
+
+
 
 
 
