@@ -17,6 +17,7 @@ export get_coin_ticker_by_id
 export get_coin_history_by_id
 export get_coin_market_chart_by_id
 export get_coin_market_chart_range_by_id
+export get_coin_status_updates_by_id
 
 
 
@@ -391,6 +392,31 @@ function get_coin_market_chart_range_by_id(id, vs_currency, from_timestamp, to_t
 end
     
     
+"""
+    get_coin_status_updates_by_id(id, kargs...)
+
+Get status updates for a given coin.
+
+# Arguments
+    `id: string` : the coin id  (eg bitcoin)
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coin_status_updates: Dict` : the status updates for a coin
+
+"""
+function get_coin_status_updates_by_id(id, kargs...)
+    apiurl = "coins/$id/status_updates"
+    kwards= Dict(kargs)
+    kwards["id"] = id
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
 
 
 end

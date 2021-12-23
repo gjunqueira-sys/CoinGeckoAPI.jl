@@ -95,6 +95,10 @@ r = get_coins_markets("usd")
 r = get_coin_market_chart_range_by_id("bitcoin", "usd", "1392577232", "1422577232")
 ```
 
+- get_coin_status_updates_by_id(id, kargs...)
+
+
+
 
 
 
