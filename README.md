@@ -112,7 +112,7 @@ r = get_coin_market_chart_range_by_id("bitcoin", "usd", "1392577232", "142257723
 
 - get_coin_status_updates_by_id(id, kargs...)
 
-- get_coin_ohlc_by_id(id, vs_currency, days, kargs...)
+- get_coin_ohlc_by_id(id, vs_currency, days)
 
 ```julia
 r = get_coin_ohlc_by_id("bitcoin", "usd", "30")
@@ -126,9 +126,33 @@ r = get_coin_ohlc_by_id("bitcoin", "usd", "30")
  Union{Float64, Int64}[1640275200000, 48644.62, 48871.58, 48644.62, 48770.99]
 ```
 
+## contract
 
+- get_coin_info_from_contract_address_by_id(id, contract_address)
 
+```julia
+get_coin_info_from_contract_address_by_id("ethereum", "0xc00e94cb662c3520282e6f5717214004a7f26888")
 
+JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 33 entries:
+  :id                    => "compound-governance-token"
+  :symbol                => "comp"
+  :name                  => "Compound"
+  :asset_platform_id     => "ethereum"
+  :platforms             => {…
+  ⋮                      => ⋮
+  ```
+
+- get_coin_market_chart_from_contract_address_by_id(id, contract_address, vs_currency, days)
+
+```julia
+get_coin_market_chart_from_contract_address_by_id("ethereum","0xc00e94cb662c3520282e6f5717214004a7f26888" , "usd", "1")
+
+JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 3 entries:
+  :prices        => JSON3.Array[Union{Float64, Int64}[1640204661493, 207.12], Union{Float64, Int64}[1640205041467, 207.115], Union{Float64, Int64}[1640205250088, 207.082], U…
+  :market_caps   => JSON3.Array[Union{Float64, Int64}[1640204661493, 1.30058e9], Union{Float64, Int64}[1640205041467, 1.30139e9], Union{Float64, Int64}[1640205250088, 1.3011…
+  :total_volumes => JSON3.Array[Union{Float64, Int64}[1640204661493, 7.5837e7], Union{Float64, Int64}[1640205041467, 7.5491e7], Union{Float64, Int64}[1640205250088, 7.54445e…
+
+  ```
 
 
 

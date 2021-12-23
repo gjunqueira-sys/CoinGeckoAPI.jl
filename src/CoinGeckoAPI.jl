@@ -19,6 +19,8 @@ export get_coin_market_chart_by_id
 export get_coin_market_chart_range_by_id
 export get_coin_status_updates_by_id
 export get_coin_ohlc_by_id
+export get_coin_info_from_contract_address_by_id
+export get_coin_market_chart_from_contract_address_by_id
 
 
 
@@ -453,6 +455,72 @@ function get_coin_ohlc_by_id(id, vs_currency, days)
     return JSON3.read(r)
     
 end
+
+
+"""
+    get_coin_info_from_contract_address_by_id(id, contract_address)
+
+Get coin info from contract address
+
+# Arguments
+    `id: string` : Asset platform (See asset_platforms endpoint for list of options)
+    `contract_address: string` : the token's contract address
+    
+# Returns
+    `coin_info: Dict` : the coin info from contract address
+
+# Example:
+```julia
+get_coin_info_from_contract_address_by_id("ethereum", "0xc00e94cb662c3520282e6f5717214004a7f26888")
+```
+
+"""
+function get_coin_info_from_contract_address_by_id(id, contract_address)
+    apiurl = "coins/$id/contract/$contract_address"
+    kwards= Dict()
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+
+
+"""
+    get_coin_market_chart_from_contract_address_by_id(id, contract_address, vs_currency, days)
+
+Get historical market data include price, market cap and 24h volume (granularity auto)
+
+# Arguments
+    `id: string` : The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
+    `contract_address: string` : Token's contract address
+    `vs_currency: string` : the currency to get the data in
+    `days: String` : Data up to number of days ago (eg. 1,14,30,max)
+
+# Returns
+    `coin_market_chart: Dict` : the historical market data for a coin
+
+# Example:
+```julia
+r = get_coin_market_chart_from_contract_address_by_id("ethereum", "0xc00e94cb662c3520282e6f5717214004a7f26888", "usd", "1")
+```
+"""
+function get_coin_market_chart_from_contract_address_by_id(id, contract_address, vs_currency, days)
+    apiurl = "coins/$id/contract/$contract_address/market_chart"
+    kwards= Dict()
+    kwards["vs_currency"] = vs_currency
+    kwards["days"] = days
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
 
 
 
