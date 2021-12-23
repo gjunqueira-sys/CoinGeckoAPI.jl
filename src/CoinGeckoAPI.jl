@@ -16,6 +16,7 @@ export get_coin_by_id
 export get_coin_ticker_by_id
 export get_coin_history_by_id
 export get_coin_market_chart_by_id
+export get_coin_market_chart_range_by_id
 
 
 
@@ -75,7 +76,7 @@ function _api_url_params(api_url, params, api_url_has_params = false)
     for a_pair in params
         api_url *=  a_pair.first * "=" * a_pair.second * "&"
     end
-
+    @show api_url[1:end-1]
     return api_url[1:end-1]
 end
 
@@ -349,10 +350,47 @@ end
 
 
 
+"""
+    get_coin_market_chart_range_by_id(id, vs_currency, from_timestamp, to_timestamp, kargs...)
 
+Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+Data granularity is automatic (cannot be adjusted)
+1 day from query time = 5 minute interval data
+1 - 90 days from query time = hourly data
+above 90 days from query time = daily data (00:00 UTC)
 
+# Arguments
+    `id: string` : the coin id 
+    `vs_currency: string` : the currency to get the data in
+    `from_timestamp: String` : the timestamp to start the data from (UNIX Timestamp (eg 1392577232))
+    `to_timestamp: String` : the timestamp to end the data from (UNIX Timestamp (eg 1422577232))
+    `kargs: dict` : the parameters to be added to the API url
 
+# Returns
+    `coin_market_chart: Dict` : the historical market data for a coin
 
+# Example:
+```julia
+r = get_coin_market_chart_range_by_id("bitcoin", "usd", "1392577232", "1422577232")
+```
+"""
+function get_coin_market_chart_range_by_id(id, vs_currency, from_timestamp, to_timestamp, kargs...)
+    apiurl = "coins/$id/market_chart/range"
+    kwards= Dict(kargs)
+    # kwards["id"] = id
+    kwards["vs_currency"] = vs_currency
+    kwards["from"] = from_timestamp
+    kwards["to"] = to_timestamp
+
+    api_url = _api_url_params(apiurl, kwards)
+    
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+    
+    
 
 
 end
