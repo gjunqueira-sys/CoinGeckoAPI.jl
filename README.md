@@ -154,5 +154,8 @@ JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 3 entries:
 
   ```
 
+- get_coin_market_chart_range_from_contract_address_by_id(id, contract_address, vs_currency, from_timestamp, to_timestamp)
+
+
 
 

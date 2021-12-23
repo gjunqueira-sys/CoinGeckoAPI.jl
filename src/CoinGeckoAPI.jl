@@ -21,6 +21,7 @@ export get_coin_status_updates_by_id
 export get_coin_ohlc_by_id
 export get_coin_info_from_contract_address_by_id
 export get_coin_market_chart_from_contract_address_by_id
+export get_coin_market_chart_range_from_contract_address_by_id
 
 
 
@@ -521,6 +522,38 @@ function get_coin_market_chart_from_contract_address_by_id(id, contract_address,
     
 end
 
+
+
+
+"""
+    get_coin_market_chart_range_from_contract_address_by_id(id, contract_address, vs_currency, from_timestamp, to_timestamp)
+
+Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+
+# Arguments
+    `id: string` : The id of the platform issuing tokens (See asset_platforms endpoint for list of options)
+    `contract_address: string` : Token's contract address
+    `vs_currency: string` : the currency to get the data in
+    `from_timestamp: String` : From date in UNIX Timestamp (eg. 1392577232)
+    `to_timestamp: String` : To date in UNIX Timestamp (eg. 1422577232)
+
+# Returns
+    `coin_market_chart: Dict` : the historical market data for a coin
+
+"""
+function get_coin_market_chart_range_from_contract_address_by_id(id, contract_address, vs_currency, from_timestamp, to_timestamp)
+    apiurl = "coins/$id/contract/$contract_address/market_chart/range"
+    kwards= Dict()
+    kwards["vs_currency"] = vs_currency
+    kwards["from"] = from_timestamp
+    kwards["to"] = to_timestamp
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
 
 
 
