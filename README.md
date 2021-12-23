@@ -85,5 +85,16 @@ r = get_coins_markets("usd")
 
 - get_coin_ticker_by_id(id, kargs...)
 
+- get_coin_history_by_id(id, date, kargs...)
+
+- get_coin_market_chart_by_id(id, vs_currency, days, kargs...)
+
+- get_coin_market_chart_range_by_id(id, vs_currency, from_timestamp, to_timestamp, kargs...)
+
+```julia
+r = get_coin_market_chart_range_by_id("bitcoin", "usd", "1392577232", "1422577232")
+```
+
+
 
 
