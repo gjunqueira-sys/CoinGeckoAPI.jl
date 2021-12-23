@@ -23,6 +23,21 @@ APIs are simple and easy to use, fully documented at the website.
 Implementation follows Python API Implementation as close as possible.
 
 Return type is easy to use Dictionary format, ready for implementation and data analysis.
+
+# Installation
+
+Pls clone this repository as this package is not yet published.
+
+> git clone, cd to the project directory, and run the following command:
+
+```julia
+pkg> activate .
+
+pkg> instantiate
+```
+
+
+
 # Examples:
 
 ```julia
