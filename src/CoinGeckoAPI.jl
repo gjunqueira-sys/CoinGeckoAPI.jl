@@ -18,6 +18,7 @@ export get_coin_history_by_id
 export get_coin_market_chart_by_id
 export get_coin_market_chart_range_by_id
 export get_coin_status_updates_by_id
+export get_coin_ohlc_by_id
 
 
 
@@ -416,6 +417,43 @@ function get_coin_status_updates_by_id(id, kargs...)
     return JSON3.read(r)
     
 end
+
+"""
+    get_coin_ohlc_by_id(id, vs_currency, days, kargs...)
+
+Get coin's ohlc
+Candles's body:
+    1-2 days: 30 minutes
+    3-30 days: 4 hours
+    31 and before: 4 days
+
+# Arguments
+    `id: string` : the coin id  (eg bitcoin)
+    `vs_currency: string` : the currency to get the data in
+    `days: String` : the number of days to get the data for
+    `kargs: dict` : the parameters to be added to the API url
+
+# Returns
+    `coin_ohlc: Dict` : the ohlc data for a coin
+
+# Example:
+```julia
+r = get_coin_ohlc_by_id("bitcoin", "usd", "30")
+```
+"""
+function get_coin_ohlc_by_id(id, vs_currency, days, kargs...)
+    apiurl = "coins/$id/ohlc"
+    kwards= Dict(kargs)
+    kwards["vs_currency"] = vs_currency
+    kwards["days"] = days
+
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
 
 
 

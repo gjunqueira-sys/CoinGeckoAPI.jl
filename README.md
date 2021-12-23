@@ -97,6 +97,21 @@ r = get_coin_market_chart_range_by_id("bitcoin", "usd", "1392577232", "142257723
 
 - get_coin_status_updates_by_id(id, kargs...)
 
+- get_coin_ohlc_by_id(id, vs_currency, days, kargs...)
+
+```julia
+r = get_coin_ohlc_by_id("bitcoin", "usd", "30")
+
+81-element JSON3.Array{JSON3.Array, Base.CodeUnits{UInt8, String}, Vector{UInt64}}:
+ Union{Float64, Int64}[1637683200000, 57418.05, 57418.05, 57418.05, 57418.05]
+ Union{Float64, Int64}[1637697600000, 57070.97, 57588.34, 57070.97, 57542.39]
+ Union{Float64, Int64}[1637712000000, 57653.91, 57851.38, 57526.34, 57526.34]
+ ⋮
+ Union{Float64, Int64}[1640260800000, 48316.72, 48630.74, 48316.72, 48630.74]
+ Union{Float64, Int64}[1640275200000, 48644.62, 48871.58, 48644.62, 48770.99]
+```
+
+
 
 
 
