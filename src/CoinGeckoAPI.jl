@@ -419,7 +419,7 @@ function get_coin_status_updates_by_id(id, kargs...)
 end
 
 """
-    get_coin_ohlc_by_id(id, vs_currency, days, kargs...)
+    get_coin_ohlc_by_id(id, vs_currency, days)
 
 Get coin's ohlc
 Candles's body:
@@ -441,9 +441,9 @@ Candles's body:
 r = get_coin_ohlc_by_id("bitcoin", "usd", "30")
 ```
 """
-function get_coin_ohlc_by_id(id, vs_currency, days, kargs...)
+function get_coin_ohlc_by_id(id, vs_currency, days)
     apiurl = "coins/$id/ohlc"
-    kwards= Dict(kargs)
+    kwards= Dict()
     kwards["vs_currency"] = vs_currency
     kwards["days"] = days
 
