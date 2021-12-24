@@ -206,6 +206,7 @@ get_coins_categories("market_cap_desc" => "true")
 get_exchanges_list()
 ```
 
+- get_exchanges_id_name_list()
 
 
 

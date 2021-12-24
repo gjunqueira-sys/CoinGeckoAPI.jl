@@ -26,6 +26,7 @@ export get_asset_platforms
 export get_coins_categories_list
 export get_coins_categories
 export get_exchanges_list
+export get_exchanges_id_name_list
 
 
 
@@ -660,6 +661,31 @@ function get_exchanges_list(kargs...)
     r = String(r.body)
     return JSON3.read(r)
 end
+
+
+
+
+"""
+    get_exchanges_id_name_list()
+
+Use this to obtain all the markets' id in order to make API calls
+
+# Arguments
+    None
+
+# Returns
+    `exchanges_id_name_list: Dict` : the exchanges id name list
+
+"""
+function get_exchanges_id_name_list()
+    apiurl = "exchanges/list"
+    
+    r =  HTTP.request("GET", url_base * apiurl)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
 
 
 
