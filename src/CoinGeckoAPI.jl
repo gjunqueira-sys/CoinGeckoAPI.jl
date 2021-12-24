@@ -709,7 +709,7 @@ function get_exchanges_by_id(id)
 end
     
 
-get_exchanges_by_id("binance")
+
 
 
 end
