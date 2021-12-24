@@ -198,6 +198,15 @@ get_coins_categories()
 get_coins_categories("market_cap_desc" => "true")
 ```
 
+## exchanges
+
+- get_exchanges_list(kargs...)
+
+```julia
+get_exchanges_list()
+```
+
+
 
 
 

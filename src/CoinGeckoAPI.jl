@@ -25,6 +25,7 @@ export get_coin_market_chart_range_from_contract_address_by_id
 export get_asset_platforms
 export get_coins_categories_list
 export get_coins_categories
+export get_exchanges_list
 
 
 
@@ -630,6 +631,35 @@ function get_coins_categories(kargs...)
     return JSON3.read(r)
 end
 
+
+"""
+    function get_exchanges_list(kargs...)
+
+List all exchanges.
+
+# Arguments
+    `kargs: Dict` : the parameters to be added to the API url
+    valid values: 
+    per_page : number of results per page 1..250. Total results per page. Default value is 100
+    page : Page through results.
+
+# Returns
+    `exchanges_list: Dict` : the exchanges list
+
+# Example:
+
+```julia
+get_exchanges_list("per_page" => "10")
+```
+"""
+function get_exchanges_list(kargs...)
+    apiurl = "exchanges"
+    kwards= Dict(kargs)
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+end
 
 
 
