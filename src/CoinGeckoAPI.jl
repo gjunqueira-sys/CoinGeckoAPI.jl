@@ -22,6 +22,9 @@ export get_coin_ohlc_by_id
 export get_coin_info_from_contract_address_by_id
 export get_coin_market_chart_from_contract_address_by_id
 export get_coin_market_chart_range_from_contract_address_by_id
+export get_asset_platforms
+export get_coins_categories_list
+export get_coins_categories
 
 
 
@@ -557,5 +560,81 @@ end
 
 
 
+"""
+    get_asset_platforms() 
+
+List all the asset platforms (blockchain networks)
+
+# Arguments
+    None
+
+# Returns
+    `asset_platforms: Dict` : the asset platforms
+"""
+function get_asset_platforms()
+    apiurl = "asset_platforms"
+    
+    r =  HTTP.request("GET", url_base * apiurl)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+"""
+    get_coins_categories_list()
+
+List all the coins categories
+
+# Arguments
+    None
+
+# Returns
+    `coins_categories: Dict` : the coins categories
+"""
+function get_coins_categories_list()
+    apiurl = "coins/categories/list"
+    
+    r =  HTTP.request("GET", url_base * apiurl)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+"""
+    get_coins_categories(kargs...)
+
+List all categories with market data.
+
+# Arguments
+    `kargs: Dict` : the parameters to be added to the API url
+    valid values: market_cap_desc (default), market_cap_asc, 
+    name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc
+
+# Returns
+    `coins_categories: Dict` : the coins categories
+
+# Example:
+```julia
+get_coins_categories()
+get_coins_categories("market_cap_desc" => "true")
+
+"""
+function get_coins_categories(kargs...)
+    apiurl = "coins/categories"
+    kwards= Dict(kargs)
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+end
+
+
+
 
 end
+
+
+
+

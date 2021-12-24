@@ -12,11 +12,11 @@
 One of the most powerfull crypto API's out there.
 APIs are simple and easy to use, fully documented at the website.
 
-("Coin Gecko API" is a trademark of [CoinGecko](https://www.coingecko.com/en/))
+("CoinGecko API" is a trademark of [CoinGecko](https://www.coingecko.com/en/))
 
 # API Information:
 
-[Coin Gecko API](https://www.coingecko.com/en/api/documentation)
+[CoinGecko API](https://www.coingecko.com/en/api/documentation)
 
 
 # Julia API 
@@ -155,6 +155,48 @@ JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 3 entries:
   ```
 
 - get_coin_market_chart_range_from_contract_address_by_id(id, contract_address, vs_currency, from_timestamp, to_timestamp)
+
+## asset_platforms
+
+- get_asset_platforms()
+
+## categories
+
+- get_coins_categories_list()
+
+```julia
+get_coins_categories_list()
+
+127-element JSON3.Array{JSON3.Object, Base.CodeUnits{UInt8, String}, Vector{UInt64}}:
+ {
+   "category_id": "aave-tokens",
+          "name": "Aave Tokens"
+}
+ {
+   "category_id": "analytics",
+          "name": "Analytics"
+}
+ {
+   "category_id": "arbitrum-ecosystem",
+          "name": "Arbitrum Ecosystem"
+}
+ ⋮
+ {
+   "category_id": "yield-farming",
+          "name": "Yield Farming"
+}
+ {
+   "category_id": "zilliqa-ecosystem",
+          "name": "Zilliqa Ecosystem"
+}
+```
+
+- get_coins_categories(kargs...)
+
+```julia
+get_coins_categories()
+get_coins_categories("market_cap_desc" => "true")
+```
 
 
 
