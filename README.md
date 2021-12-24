@@ -208,6 +208,21 @@ get_exchanges_list()
 
 - get_exchanges_id_name_list()
 
+- get_exchanges_by_id(id)
+
+```julia
+get_exchanges_by_id("binance")
+
+JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 23 entries:
+  :name             => "Binance"
+  :year_established => 2017
+  :country          => "Cayman Islands"
+  :description      => ""
+  :url              => "https://www.binance.com/"
+  ⋮                 => ⋮
+```
+
+
 
 
 

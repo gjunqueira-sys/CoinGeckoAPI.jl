@@ -27,6 +27,7 @@ export get_coins_categories_list
 export get_coins_categories
 export get_exchanges_list
 export get_exchanges_id_name_list
+export get_exchanges_by_id
 
 
 
@@ -687,6 +688,28 @@ function get_exchanges_id_name_list()
 end
 
 
+"""
+    get_exchanges_by_id(id)
+
+Get exchange volume in BTC and top 100 tickers
+
+# Arguments
+    `id: string` : the id of the exchange
+
+# Returns
+    `exchanges_by_id: Dict` : the exchange data
+"""
+function get_exchanges_by_id(id)
+    apiurl = "exchanges/$id"
+    
+    r =  HTTP.request("GET", url_base * apiurl)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+    
+
+get_exchanges_by_id("binance")
 
 
 end
