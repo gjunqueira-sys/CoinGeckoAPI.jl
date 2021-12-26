@@ -224,5 +224,26 @@ JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 23 entries:
 
 - get_exchanges_tickers_by_id(id, kargs... )
 
+- get_exchanges_status_updates_by_id(id, kargs...)
 
+```julia
+get_exchanges_status_updates_by_id("binance")
+
+get_exchanges_status_updates_by_id("binance", "per_page"=>"10")
+```
+
+- get_exchanges_volume_chart_by_id(id, days)
+
+```julia
+get_exchanges_volume_chart_by_id("binance", "30")
+
+30-element JSON3.Array{JSON3.Array, Base.CodeUnits{UInt8, String}, Vector{UInt64}}:
+ Any[1638022800000, "529680.87749353202570498616853533833"]
+ Any[1638109200000, "444347.83566551594321406818580463667"]
+ Any[1638195600000, "478727.98568245357883372214792819939"]
+ ⋮
+ Any[1640442000000, "331762.75766868006140462738118385402"]
+ Any[1640528400000, "312634.85245232699015407131767806725"]
+ ```
+ 
 

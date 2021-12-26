@@ -29,6 +29,8 @@ export get_exchanges_list
 export get_exchanges_id_name_list
 export get_exchanges_by_id
 export get_exchanges_tickers_by_id
+export get_exchanges_status_updates_by_id
+export get_exchanges_volume_chart_by_id
 
 
 
@@ -732,6 +734,58 @@ function get_exchanges_tickers_by_id(id, kargs... )
     r = String(r.body)
     return JSON3.read(r)
     
+end
+    
+"""
+    get_exchanges_status_updates_by_id(id, kargs... )
+
+Get status updates for a given exchange
+
+# Arguments
+    `id: string` : the id of the exchange (can be obtained from exchanges/list eg.binance)
+    `kargs: Dict` : the parameters to be added to the API url
+
+# Returns
+    `exchanges_status_updates_by_id: Dict` : the exchange status updates
+
+# Example:
+```julia
+get_exchanges_status_updates_by_id("binance")
+```
+"""
+function get_exchanges_status_updates_by_id(id, kargs... )
+    apiurl = "exchanges/$id/status_updates"
+    kwards= Dict(kargs)
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+    
+end
+
+
+
+"""
+    get_exchanges_volume_chart_by_id(id, days)
+
+Get volume_chart data for a given exchange
+
+# Arguments
+    `id: string` : the id of the exchange (can be obtained from exchanges/list eg.binance)
+    `days: String` : data up to number of days ago
+
+# Returns
+    `exchanges_volume_chart_by_id: Dict` : the exchange volume chart
+"""
+function get_exchanges_volume_chart_by_id(id, days)
+    apiurl = "exchanges/$id/volume_chart"
+    kwards= Dict()
+    kwards["days"] = days
+    api_url = _api_url_params(apiurl, kwards)
+    r =  HTTP.request("GET", url_base * api_url)
+    r = String(r.body)
+    return JSON3.read(r)
+
 end
     
     
