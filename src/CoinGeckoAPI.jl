@@ -31,6 +31,7 @@ export get_exchanges_by_id
 export get_exchanges_tickers_by_id
 export get_exchanges_status_updates_by_id
 export get_exchanges_volume_chart_by_id
+export get_finance_platforms
 
 
 
@@ -55,10 +56,10 @@ Function to check if the API is up and running
 # Returns
 """
 function ping()
-    apiurl ="ping"
-    r =  HTTP.request("GET", url_base * apiurl)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl ="ping";
+    r =  HTTP.request("GET", url_base * apiurl);
+    r = String(r.body);
+    return JSON3.read(r);
 
 end
 
@@ -82,16 +83,16 @@ Function to build the API url with the parameters
 function _api_url_params(api_url, params, api_url_has_params = false)
     
     if api_url_has_params == true
-        api_url = api_url * "&"
+        api_url = api_url * "&";
     else
-        api_url = api_url * "?"
+        api_url = api_url * "?";
     end
 
     for a_pair in params
-        api_url *=  a_pair.first * "=" * a_pair.second * "&"
+        api_url *=  a_pair.first * "=" * a_pair.second * "&";
     end
-    @show api_url[1:end-1]
-    return api_url[1:end-1]
+    
+    return api_url[1:end-1];
 end
 
 
@@ -119,15 +120,15 @@ r = get_price("bitcoin", "usd", "include_market_cap" => "true", "include_24hr_vo
 
 """
 function get_price(ids, vs_currencies, kargs...)
-    apiurl = "simple/price"
-    kwards= Dict(kargs)
-    kwards["ids"] = ids
-    kwards["vs_currencies"] = vs_currencies
+    apiurl = "simple/price";
+    kwards= Dict(kargs);
+    kwards["ids"] = ids;
+    kwards["vs_currencies"] = vs_currencies;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 
 end
@@ -136,16 +137,16 @@ end
 
 
 function get_token_price(id, contract_addresses, vs_currencies, kargs...)
-    apiurl = "simple/token_price"
-    kwards= Dict(kargs)
-    kwards["id"] = id
-    kwards["contract_addresses"] = contract_addresses
-    kwards["vs_currencies"] = vs_currencies
+    apiurl = "simple/token_price";
+    kwards= Dict(kargs);
+    kwards["id"] = id;
+    kwards["contract_addresses"] = contract_addresses;
+    kwards["vs_currencies"] = vs_currencies;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 
 end
@@ -166,10 +167,10 @@ Get list of supported_vs_currencies
     `supported_vs_currencies: Dict` : the list of supported_vs_currencies
 """
 function get_supported_vs_currencies()
-    apiurl = "simple/supported_vs_currencies"
-    r =  HTTP.request("GET", url_base * apiurl)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl = "simple/supported_vs_currencies";
+    r =  HTTP.request("GET", url_base * apiurl);
+    r = String(r.body);
+    return JSON3.read(r);
     
 
 end
@@ -189,13 +190,13 @@ List all coins with data (name, price, market, developer, community, etc)
 
 """
 function get_coins_list(kargs...)
-    apiurl = "coins/list"
-    kwards= Dict(kargs)
+    apiurl = "coins/list";
+    kwards= Dict(kargs);
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 
 end
@@ -221,14 +222,14 @@ r = get_coins_markets("usd")
 ````
 """
 function get_coins_markets(vs_currency, kargs...)
-    apiurl = "coins/markets"
-    kwards= Dict(kargs)
-    kwards["vs_currency"] = vs_currency
+    apiurl = "coins/markets";
+    kwards= Dict(kargs);
+    kwards["vs_currency"] = vs_currency;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -247,14 +248,14 @@ Get current data (name, price, market, including exchange tickers for a coin)
 
 """
 function get_coin_by_id(id, kargs...)
-    apiurl = "coins"
-    kwards= Dict(kargs)
-    kwards["id"] = id
+    apiurl = "coins";
+    kwards= Dict(kargs);
+    kwards["id"] = id;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -276,14 +277,14 @@ Get coin tickers (paginated to 100 items)
 
 """
 function get_coin_ticker_by_id(id, kargs...)
-    apiurl = "coins/$id/tickers"
-    kwards= Dict(kargs)
-    kwards["id"] = id
+    apiurl = "coins/$id/tickers";
+    kwards= Dict(kargs);
+    kwards["id"] = id;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -310,15 +311,15 @@ r = get_coin_history_by_id("bitcoin", "30-12-2017")
 ````
 """
 function get_coin_history_by_id(id, date, kargs...)
-    apiurl = "coins/$id/history"
-    kwards= Dict(kargs)
-    kwards["id"] = id
-    kwards["date"] = date
+    apiurl = "coins/$id/history";
+    kwards= Dict(kargs);
+    kwards["id"] = id;
+    kwards["date"] = date;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -349,16 +350,16 @@ r = get_coin_market_chart_by_id("bitcoin", "usd", "30")
 
 """
 function get_coin_market_chart_by_id(id, vs_currency, days, kargs...)
-    apiurl = "coins/$id/market_chart"
-    kwards= Dict(kargs)
-    kwards["id"] = id
-    kwards["vs_currency"] = vs_currency
-    kwards["days"] = days
+    apiurl = "coins/$id/market_chart";
+    kwards= Dict(kargs);
+    kwards["id"] = id;
+    kwards["vs_currency"] = vs_currency;
+    kwards["days"] = days;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -389,18 +390,18 @@ r = get_coin_market_chart_range_by_id("bitcoin", "usd", "1392577232", "142257723
 ```
 """
 function get_coin_market_chart_range_by_id(id, vs_currency, from_timestamp, to_timestamp, kargs...)
-    apiurl = "coins/$id/market_chart/range"
-    kwards= Dict(kargs)
-    # kwards["id"] = id
-    kwards["vs_currency"] = vs_currency
-    kwards["from"] = from_timestamp
-    kwards["to"] = to_timestamp
-
-    api_url = _api_url_params(apiurl, kwards)
+    apiurl = "coins/$id/market_chart/range";
+    kwards= Dict(kargs);
     
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    kwards["vs_currency"] = vs_currency;
+    kwards["from"] = from_timestamp;
+    kwards["to"] = to_timestamp;
+
+    api_url = _api_url_params(apiurl, kwards);
+    
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
     
@@ -419,14 +420,14 @@ Get status updates for a given coin.
 
 """
 function get_coin_status_updates_by_id(id, kargs...)
-    apiurl = "coins/$id/status_updates"
-    kwards= Dict(kargs)
-    kwards["id"] = id
+    apiurl = "coins/$id/status_updates";
+    kwards= Dict(kargs);
+    kwards["id"] = id;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -454,15 +455,15 @@ r = get_coin_ohlc_by_id("bitcoin", "usd", "30")
 ```
 """
 function get_coin_ohlc_by_id(id, vs_currency, days)
-    apiurl = "coins/$id/ohlc"
-    kwards= Dict()
-    kwards["vs_currency"] = vs_currency
-    kwards["days"] = days
+    apiurl = "coins/$id/ohlc";
+    kwards= Dict();
+    kwards["vs_currency"] = vs_currency;
+    kwards["days"] = days;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -486,13 +487,13 @@ get_coin_info_from_contract_address_by_id("ethereum", "0xc00e94cb662c3520282e6f5
 
 """
 function get_coin_info_from_contract_address_by_id(id, contract_address)
-    apiurl = "coins/$id/contract/$contract_address"
-    kwards= Dict()
+    apiurl = "coins/$id/contract/$contract_address";
+    kwards= Dict();
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -519,15 +520,15 @@ r = get_coin_market_chart_from_contract_address_by_id("ethereum", "0xc00e94cb662
 ```
 """
 function get_coin_market_chart_from_contract_address_by_id(id, contract_address, vs_currency, days)
-    apiurl = "coins/$id/contract/$contract_address/market_chart"
-    kwards= Dict()
-    kwards["vs_currency"] = vs_currency
-    kwards["days"] = days
+    apiurl = "coins/$id/contract/$contract_address/market_chart";
+    kwards= Dict();
+    kwards["vs_currency"] = vs_currency;
+    kwards["days"] = days;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -551,16 +552,16 @@ Get historical market data include price, market cap, and 24h volume within a ra
 
 """
 function get_coin_market_chart_range_from_contract_address_by_id(id, contract_address, vs_currency, from_timestamp, to_timestamp)
-    apiurl = "coins/$id/contract/$contract_address/market_chart/range"
-    kwards= Dict()
-    kwards["vs_currency"] = vs_currency
-    kwards["from"] = from_timestamp
-    kwards["to"] = to_timestamp
+    apiurl = "coins/$id/contract/$contract_address/market_chart/range";
+    kwards= Dict();
+    kwards["vs_currency"] = vs_currency;
+    kwards["from"] = from_timestamp;
+    kwards["to"] = to_timestamp;
 
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -578,11 +579,11 @@ List all the asset platforms (blockchain networks)
     `asset_platforms: Dict` : the asset platforms
 """
 function get_asset_platforms()
-    apiurl = "asset_platforms"
+    apiurl = "asset_platforms";
     
-    r =  HTTP.request("GET", url_base * apiurl)
-    r = String(r.body)
-    return JSON3.read(r)
+    r =  HTTP.request("GET", url_base * apiurl);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -599,11 +600,11 @@ List all the coins categories
     `coins_categories: Dict` : the coins categories
 """
 function get_coins_categories_list()
-    apiurl = "coins/categories/list"
+    apiurl = "coins/categories/list";
     
-    r =  HTTP.request("GET", url_base * apiurl)
-    r = String(r.body)
-    return JSON3.read(r)
+    r =  HTTP.request("GET", url_base * apiurl);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -628,12 +629,12 @@ get_coins_categories("market_cap_desc" => "true")
 
 """
 function get_coins_categories(kargs...)
-    apiurl = "coins/categories"
-    kwards= Dict(kargs)
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl = "coins/categories";
+    kwards= Dict(kargs);
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
 end
 
 
@@ -658,12 +659,12 @@ get_exchanges_list("per_page" => "10")
 ```
 """
 function get_exchanges_list(kargs...)
-    apiurl = "exchanges"
-    kwards= Dict(kargs)
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl = "exchanges";
+    kwards= Dict(kargs);
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
 end
 
 
@@ -682,11 +683,11 @@ Use this to obtain all the markets' id in order to make API calls
 
 """
 function get_exchanges_id_name_list()
-    apiurl = "exchanges/list"
+    apiurl = "exchanges/list";
     
-    r =  HTTP.request("GET", url_base * apiurl)
-    r = String(r.body)
-    return JSON3.read(r)
+    r =  HTTP.request("GET", url_base * apiurl);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -703,11 +704,11 @@ Get exchange volume in BTC and top 100 tickers
     `exchanges_by_id: Dict` : the exchange data
 """
 function get_exchanges_by_id(id)
-    apiurl = "exchanges/$id"
+    apiurl = "exchanges/$id";
     
-    r =  HTTP.request("GET", url_base * apiurl)
-    r = String(r.body)
-    return JSON3.read(r)
+    r =  HTTP.request("GET", url_base * apiurl);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -727,12 +728,12 @@ Get exchange tickers (paginated)
 
 """
 function get_exchanges_tickers_by_id(id, kargs... )
-    apiurl = "exchanges/$id/tickers"
-    kwards= Dict(kargs)
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl = "exchanges/$id/tickers";
+    kwards= Dict(kargs);
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
     
@@ -754,12 +755,12 @@ get_exchanges_status_updates_by_id("binance")
 ```
 """
 function get_exchanges_status_updates_by_id(id, kargs... )
-    apiurl = "exchanges/$id/status_updates"
-    kwards= Dict(kargs)
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl = "exchanges/$id/status_updates";
+    kwards= Dict(kargs);
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
 end
 
@@ -778,21 +779,51 @@ Get volume_chart data for a given exchange
     `exchanges_volume_chart_by_id: Dict` : the exchange volume chart
 """
 function get_exchanges_volume_chart_by_id(id, days)
-    apiurl = "exchanges/$id/volume_chart"
-    kwards= Dict()
-    kwards["days"] = days
-    api_url = _api_url_params(apiurl, kwards)
-    r =  HTTP.request("GET", url_base * api_url)
-    r = String(r.body)
-    return JSON3.read(r)
+    apiurl = "exchanges/$id/volume_chart";
+    kwards= Dict();
+    kwards["days"] = days;
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
 
 end
     
+  
+"""
+    function get_finance_platforms(kargs...)
+
+List all finance platforms
+
+# Arguments
+    `kargs: Dict` : the parameters to be added to the API url
+    valid values: 
+    per_page : number of results per page 1..250. Total results per page. Default value is 100
+    page : Page of results (paginated to 100 by default)
+
+# Returns
+    `finance_platforms: Dict` : the finance platforms
+
+"""
+function get_finance_platforms(kargs...)
+    apiurl = "finance_platforms";
+    kwards= Dict(kargs);
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
     
+end
+
+
 
 
 
 end
+
+
+
+
 
 
 
