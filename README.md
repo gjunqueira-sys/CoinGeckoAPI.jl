@@ -36,9 +36,13 @@ pkg> activate .
 pkg> instantiate
 ```
 
+__For an actual application example, pls see my blog post at:__
 
+[https://gjunqueira-sys.github.io/J-J-Engineering-Blog/jupyter/julialang/crypto/2021/12/29/BasicAPIBlogPart1.html](https://gjunqueira-sys.github.io/J-J-Engineering-Blog/jupyter/julialang/crypto/2021/12/29/BasicAPIBlogPart1.html)
 
 # Examples:
+
+
 
 ```julia
 using CoinGeckoAPI
