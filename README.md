@@ -246,4 +246,38 @@ get_exchanges_volume_chart_by_id("binance", "30")
  Any[1640528400000, "312634.85245232699015407131767806725"]
  ```
  
+## Finance
 
+- get_finance_platforms(kargs...)
+
+- get_finance_products(kargs...)
+
+```julia
+get_finance_products("page" => "1", "per_page" => "2")
+
+2-element JSON3.Array{JSON3.Object, Base.CodeUnits{UInt8, String}, Vector{UInt64}}:
+ {
+                 "platform": "Staked US",
+               "identifier": "Keep",
+   "supply_rate_percentage": "3.4",
+   "borrow_rate_percentage": nothing,
+          "number_duration": nothing,
+          "length_duration": nothing,
+                 "start_at": 0,
+                   "end_at": 0,
+                 "value_at": 0,
+                "redeem_at": 0
+}
+ {
+                 "platform": "Celsius Network",
+               "identifier": "XTZ",
+   "supply_rate_percentage": "4.16",
+   "borrow_rate_percentage": nothing,
+          "number_duration": nothing,
+          "length_duration": nothing,
+                 "start_at": 0,
+                   "end_at": 0,
+                 "value_at": 0,
+                "redeem_at": 0
+}
+```

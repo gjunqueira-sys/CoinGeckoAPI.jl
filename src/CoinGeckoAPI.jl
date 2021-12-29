@@ -32,6 +32,7 @@ export get_exchanges_tickers_by_id
 export get_exchanges_status_updates_by_id
 export get_exchanges_volume_chart_by_id
 export get_finance_platforms
+export get_finance_products
 
 
 
@@ -815,6 +816,28 @@ function get_finance_platforms(kargs...)
     
 end
 
+
+
+"""
+    get_finance_products(kargs...)
+
+List all finance finance_products
+
+# Arguments
+    `kargs: Dict` : the parameters to be added to the API url
+    
+# Returns
+    `finance_products: Dict` : the finance products
+"""
+function get_finance_products(kargs...)
+    apiurl = "finance_products";
+    kwards= Dict(kargs);
+    api_url = _api_url_params(apiurl, kwards);
+    r =  HTTP.request("GET", url_base * api_url);
+    r = String(r.body);
+    return JSON3.read(r);
+    
+end
 
 
 
